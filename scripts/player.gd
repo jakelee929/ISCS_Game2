@@ -1,8 +1,9 @@
 extends CharacterBody2D
-
+@onready var riff = $"../elphaba/AudioStreamPlayer2D"
 
 const SPEED = 150.0
-const JUMP_VELOCITY = -250.0
+const JUMP_VELOCITY = -350.0
+var DEFYING_GRAVITY = 1
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -13,7 +14,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = JUMP_VELOCITY * DEFYING_GRAVITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -39,3 +40,17 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("PeePeePooPoo"): 
+		print("STOP STEPPING ON ME")
+		DEFYING_GRAVITY = 3
+	pass # Replace with function body.
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("PeePeePooPoo"): 
+		print("AAAAAAAAAAAA")
+		DEFYING_GRAVITY = 1
+		riff.playing = true
+		# play audio 
+	pass # Replace with function body.
