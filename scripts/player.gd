@@ -1,8 +1,9 @@
 extends CharacterBody2D
 @onready var riff = $"../elphaba/AudioStreamPlayer2D"
 
-const SPEED = 150.0
+const SPEED = 175.0
 const JUMP_VELOCITY = -350.0
+const acc = 15
 var DEFYING_GRAVITY = 1
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -35,9 +36,12 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("jump")
 	
 	if direction:
-		velocity.x = direction * SPEED
+		if direction > 0:
+			velocity.x = min(velocity.x + acc, SPEED)
+		if direction < 0:
+			velocity.x = max(velocity.x - acc, -SPEED)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = lerp(velocity.x, 0.0, 0.2)
 
 	move_and_slide()
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://c5553khy4w74o"]
+[gd_scene load_steps=9 format=4 uid="uid://c5553khy4w74o"]
 
 [ext_resource type="PackedScene" uid="uid://dpcswkam6e6nj" path="res://scenes/player.tscn" id="1_xlf6u"]
 [ext_resource type="Texture2D" uid="uid://b8qrbql8r0iga" path="res://assets/sprites/tileset_packed.png" id="2_7eicb"]
 [ext_resource type="PackedScene" uid="uid://g5rv8nyki7mi" path="res://scenes/elphaba.tscn" id="3_sp72j"]
-[ext_resource type="PackedScene" uid="uid://btl6h4ykbnvew" path="res://scenes/slime.tscn" id="4_i485m"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_jfo6g"]
 tile_data = PackedInt32Array(0, 65538, 0, 65536, 65538, 6, 131072, 65538, 6, 1, 131074, 0, 65537, 131074, 6, 131073, 131074, 6, 2, 131074, 0, 65538, 131074, 6, 131074, 131074, 6)
@@ -668,12 +667,7 @@ offset_bottom = -1290.0
 text = "defying gravity
 "
 
-[node name="slime" parent="." instance=ExtResource("4_i485m")]
-position = Vector2(141, 13)
-scale = Vector2(0.89, 0.89)
-
 [connection signal="body_entered" from="elphaba/Area2D" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="elphaba/Area2D" to="Player" method="_on_area_2d_body_exited"]
 
 [editable path="elphaba"]
-[editable path="slime"]
